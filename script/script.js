@@ -30,6 +30,7 @@ let touchEndX = 0;
 items.forEach((item) => {
     item.addEventListener("touchstart", (element) => {
       touchStartX = element.changedTouches[0].screenX;
+      clearInterval(refreshSlider);
     });
 
     item.addEventListener("touchend", (element) => {
@@ -39,6 +40,7 @@ items.forEach((item) => {
         } else if (touchStartX > touchEndX) {
             nxtBtn.click();
         }
+        refreshSlider = setInterval(() => nxtBtn.click(), 4000);
     })
 })
 
