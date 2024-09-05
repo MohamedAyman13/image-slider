@@ -9,40 +9,36 @@ let prevBtn = document.querySelector(".prev");
 let active = 0;
 let listLength = items.length - 1;
 
-
-
 // auto play every 4 seconds
 let refreshSlider = setInterval(() => nxtBtn.click(), 4000);
 items.forEach((item) => {
-    item.addEventListener("mouseover", () => {
-        clearInterval(refreshSlider);
-    });
-    
-    item.addEventListener("mouseout", () => {
-        refreshSlider = setInterval(() => nxtBtn.click(), 4000);
-    });
-});
+  item.addEventListener("mouseover", () => {
+    clearInterval(refreshSlider);
+  });
 
+  item.addEventListener("mouseout", () => {
+    refreshSlider = setInterval(() => nxtBtn.click(), 4000);
+  });
+});
 
 // swipe by touch screen
 let touchStartX = 0;
 let touchEndX = 0;
 items.forEach((item) => {
-    item.addEventListener("touchstart", (element) => {
-      touchStartX = element.changedTouches[0].screenX;
-      clearInterval(refreshSlider);
-    });
+  item.addEventListener("touchstart", (element) => {
+    touchStartX = element.changedTouches[0].screenX;
+    clearInterval(refreshSlider);
+  });
 
-    item.addEventListener("touchend", (element) => {
-        touchEndX = element.changedTouches[0].screenX;
-        if (touchEndX > touchStartX) {
-            prevBtn.click();
-        } else if (touchStartX > touchEndX) {
-            nxtBtn.click();
-        }
-        refreshSlider = setInterval(() => nxtBtn.click(), 4000);
-    })
-})
+  item.addEventListener("touchend", (element) => {
+    touchEndX = element.changedTouches[0].screenX;
+    if (touchEndX > touchStartX) {
+      prevBtn.click();
+    } else if (touchStartX > touchEndX) {
+      nxtBtn.click();
+    }
+  });
+});
 
 // click next and prev buttons functionality
 nxtBtn.onclick = () => {
